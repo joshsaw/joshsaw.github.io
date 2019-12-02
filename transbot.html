@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<title>transbot</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<button id="button1" onclick="CopyToClipboard('div1')">Click to copy</button>
+
+<body>
+
+
+   <divs id="div1" class="mypanel"></divs>
+
+    <script>
+
+
+    $.getJSON('https://api.pushshift.io/reddit/search/comment/?q=transgenders|tranny|trans|transgender|transgenders&subreddit=conservative&size=500&after=1d', function(data) { 
+
+
+        
+		 
+		
+
+		var text = "";
+		var i;
+		for (i = 0; i < data.data.length; i++) {
+   
+                        text += `<div>  ## **&#92;u&#92;${data.data[i].author}** <br>`
+			text += ` <text> >${data.data[i].body}  </text>`
+                        text += ` [view comment](http://reddit.com${data.data[i].permalink}) <br><br><br></div>`
+   
+             }
+			//${data.data[i].score} points 
+			//points
+     
+
+        $(".mypanel").html(text);
+		
+		
+	
+     });
+
+function CopyToClipboard(containerid) {
+if (document.selection) { 
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("copy"); 
+
+} else if (window.getSelection) {
+    var range = document.createRange();
+     range.selectNode(document.getElementById(containerid));
+     window.getSelection().addRange(range);
+     document.execCommand("copy");
+    // alert("text copied") 
+}}
+    </script>
+    
+</body>
+
+</html>
